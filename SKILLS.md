@@ -1,6 +1,12 @@
 ---
 name: minions-test-scenarios
-description: Conversation scripts, tester personas, edge cases, and golden datasets
+id: OC-0169
+version: 1.0.0
+description: "Conversation scripts, tester personas, edge cases, and golden datasets"
+category: ai
+subcategory: general
+tags: ["minion", "ai", "general"]
+comments:
 ---
 
 # minions-test-scenarios — Agent Skills
