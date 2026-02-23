@@ -1,126 +1,69 @@
 ---
 name: minions-test-scenarios
-description: Agent skills for working with Minions Test-scenarios MinionTypes. Provides CRUD operations, CLI usage, and best practices for AI agents managing minions-test-scenarios data.
+description: Conversation scripts, tester personas, edge cases, and golden datasets
 ---
 
-# Minions Test-scenarios Agent Skills
+# minions-test-scenarios — Agent Skills
 
-Skills for agents operating on the `minions-test-scenarios` toolbox.
+## What is a Test Scenario in the Minions Context?
 
-## Prerequisites
+```
+a multi-turn conversation test            → TestScenario
+a simulated user persona                  → TesterPersona
+expected input-output pairs               → GoldenDataset
+```
 
-Install the SDK and CLI:
+AI-as-Tester: the ScenarioAgent dynamically converses with the agent-under-test.
+
+## MinionTypes
+```ts
+// test-scenario — name, turns, expected outcome, difficulty, tags
+// tester-persona — traits, communication style, technical level
+// golden-dataset — curated expected pairs for regression testing
+```
+
+## Agent SKILLS
+```markdown
+# ScenarioAgent Skills
+## Skill: Design Scenario — create multi-turn test with assertions
+## Skill: Run AI-as-Tester — dynamically converse using persona
+## Hard Rules — every scenario must have expected outcomes defined
+```
+
+
+---
+
+## CLI Reference
+
+Install globally:
 
 ```bash
-# TypeScript
-pnpm add @minions-test-scenarios/sdk
-
-# Python
-pip install minions-test-scenarios
-
-# CLI
 pnpm add -g @minions-test-scenarios/cli
 ```
 
----
+Set `MINIONS_STORE` env var to control where data is stored (default: `.minions/`).
 
-## Using the CLI
-
-The `test-scenarios` CLI provides basic project info and utilities:
+### Discover Types
 
 ```bash
-# Show project info (SDK name, CLI name, Python package)
-test-scenarios info
+test-scenarios types list
+test-scenarios types show <type-slug>
 ```
 
-Use the CLI as the primary interface for scripted operations. For programmatic access within agent code, use the SDK directly.
+### CRUD
 
----
-
-## Using the SDK
-
-### TypeScript
-
-```ts
-import { customTypes } from '@minions-test-scenarios/sdk/schemas';
-
-// List all available MinionTypes in this toolbox
-for (const type of customTypes) {
-  console.log(`${type.icon} ${type.name} (${type.slug})`);
-  console.log(`  ${type.description}`);
-  console.log(`  Fields: ${type.schema.map(f => f.name).join(', ')}`);
-}
-
-// Access a specific type
-const myType = customTypes.find(t => t.slug === 'YOUR_TYPE_SLUG');
+```bash
+test-scenarios create <type> -t "Title" -s "status"
+test-scenarios list <type>
+test-scenarios show <id>
+test-scenarios update <id> --data '{ "status": "active" }'
+test-scenarios delete <id>
+test-scenarios search "query"
 ```
 
-### Python
+### Stats & Validation
 
-```python
-from minions_test_scenarios.schemas import custom_types
-
-# List all available MinionTypes
-for t in custom_types:
-    print(f"{t.icon} {t.name} ({t.slug})")
-    print(f"  {t.description}")
+```bash
+test-scenarios stats
+test-scenarios validate ./my-minion.json
 ```
-
----
-
-## Skill: Create Minion
-
-When creating a new Minion of any type in this toolbox:
-
-1. Look up the MinionType from `customTypes` by slug
-2. Validate all required fields are present according to the schema
-3. Set `string` fields to their values, `number` fields to numeric values
-4. Set `select` fields to one of their valid options
-5. Set `boolean` fields to `true` or `false`
-6. Always include a timestamp for any `createdAt` or similar fields (ISO 8601 format)
-
----
-
-## Skill: Read / Query Minions
-
-When reading or searching for Minions:
-
-1. Query by MinionType slug to filter by type
-2. Use field values for secondary filtering
-3. For references (fields ending in `Id`), resolve the linked Minion for full context
-4. Return results in a structured format the calling agent can parse
-
----
-
-## Skill: Update Minion
-
-When updating an existing Minion:
-
-1. Load the current Minion by ID
-2. Validate the update against the MinionType schema
-3. Only modify the fields that need changing — preserve existing values
-4. If the type has a `status` field, follow valid status transitions
-5. If the type has an `updatedAt` field, set it to the current timestamp
-6. Log significant field changes for audit if the context requires it
-
----
-
-## Skill: Delete / Archive Minion
-
-When removing a Minion:
-
-1. Prefer soft-delete: set `status` to `"cancelled"` or `"archived"` if available
-2. Never hard-delete Minions that other Minions reference via ID fields
-3. Check for dependent Minions before any destructive operation
-4. If hard-delete is required, ensure all references are cleaned up first
-
----
-
-## Hard Rules
-
-- Every Minion MUST conform to its MinionType schema
-- All `select` fields must use valid option values
-- All ID reference fields must point to existing Minions
-- Timestamps must be in ISO 8601 format
-- Never create orphaned Minions — always set reference fields when applicable
-- This agent only writes to `minions-test-scenarios` — it reads from other toolboxes but never writes to them
