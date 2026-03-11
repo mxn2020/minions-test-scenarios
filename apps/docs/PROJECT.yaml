@@ -1,0 +1,8 @@
+name: "@minions-test-scenarios/docs"
+project_scope: child
+child_type: docs
+parent_project: minions-test-scenarios-workspace
+description: "Standard compliance definition for @minions-test-scenarios/docs"
+priority: high
+deploy_url: null
+tags: null

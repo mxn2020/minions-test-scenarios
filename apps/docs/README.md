@@ -1,0 +1,1 @@
+# @minions-test-scenarios/docs\n\nStandard compliance definition for @minions-test-scenarios/docs\n\n![CI](https://github.com/mxn2020/@minions-test-scenarios/docs/actions/workflows/ci.yml/badge.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)\n

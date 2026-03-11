@@ -1,0 +1,8 @@
+name: "@minions-test-scenarios/web"
+project_scope: child
+child_type: web-app
+parent_project: minions-test-scenarios-workspace
+description: "Standard compliance definition for @minions-test-scenarios/web"
+priority: high
+deploy_url: null
+tags: null

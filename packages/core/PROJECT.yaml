@@ -1,0 +1,8 @@
+name: "@minions-test-scenarios/sdk"
+project_scope: child
+child_type: sdk
+parent_project: minions-test-scenarios-workspace
+description: "Conversation scripts, tester personas, edge cases, and golden datasets"
+priority: high
+deploy_url: null
+tags: null
