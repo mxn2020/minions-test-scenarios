@@ -6,3 +6,4 @@ description: "CLI for minions-test-scenarios — Conversation scripts, tester pe
 priority: high
 deploy_url: null
 tags: null
+category: minion-toolbox
