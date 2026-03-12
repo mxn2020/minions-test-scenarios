@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "minions-test-scenarios"
-version = "0.1.0"
+version = "0.2.0"
 description = "Conversation scripts, tester personas, edge cases, and golden datasets"
 readme = "README.md"
 license = { text = "MIT" }

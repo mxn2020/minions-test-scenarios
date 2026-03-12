@@ -1,7 +1,7 @@
 {
   "name": "minions-test-scenarios-workspace",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Conversation scripts, tester personas, edge cases, and golden datasets",
   "type": "module",
   "license": "MIT",
