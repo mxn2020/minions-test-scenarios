@@ -1,0 +1,16 @@
+name: minions-test-scenarios-workspace
+project_scope: main
+project_type: monorepo
+description: Conversation scripts, tester personas, edge cases, and golden datasets
+tier: prototype
+lane: minions-platform
+priority: medium
+oss: true
+stack: ["typescript"]
+repo: "https://github.com/mxn2020/minions-test-scenarios"
+deploy_url: null
+last_active: 2026-03-11
+tags: ["minions-test-scenarios-workspace", "minions", "toolbox"]
+notes: null
+id: null
+category: minion-toolbox
